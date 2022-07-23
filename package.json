@@ -17,8 +17,28 @@
 		"commands": [{
             "command": "pa.helloWorld",
             "title": "Hello World"
-
-		}]
+		}],
+		"viewsContainers": {
+			"activitybar": [
+			  {
+				"id": "package-explorer",
+				"title": "Profile Accesser",
+				"icon": "media/icon.svg"
+			  }
+			]
+		  },
+		  "views": {
+			"package-explorer": [
+			  {
+				"id": "package-fields",
+				"name": "fields"
+			  },
+			  {
+				"id": "package-profiles",
+				"name": "profiles"
+			  }
+			]
+		  }
 	},
 	"scripts": {
 		"lint": "eslint .",
@@ -36,5 +56,4 @@
         "typescript": "^4.7.4",
         "@vscode/test-electron": "^2.1.5"
     }
-
 }
