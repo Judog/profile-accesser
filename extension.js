@@ -1,6 +1,8 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
+const FileExplorer = require('./FileExplorer');
+
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -9,10 +11,25 @@ const vscode = require('vscode');
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-
+	
+	new FileExplorer(context);
+	let wf;
+	let f;
+	if(vscode.workspace.workspaceFolders !== undefined) {
+		wf = vscode.workspace.workspaceFolders[0].uri.path ;
+		f = vscode.workspace.workspaceFolders[0].uri.fsPath ; 
+	
+		let message = `YOUR-EXTENSION: folder: ${wf} - ${f}` ;
+	
+		vscode.window.showInformationMessage(message);
+	} 
+	else {
+		let message = "YOUR-EXTENSION: Working folder not found, open a folder an try again" ;
+		vscode.window.showErrorMessage(message);
+	}
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "pa" is now active!');
+	console.log(wf);
 
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with  registerCommand
@@ -21,7 +38,7 @@ function activate(context) {
 		// The code you place here will be executed every time your command is executed
 		console.log('weszło');
 		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from profile accesser!');
+
 	});
 
 	context.subscriptions.push(disposable);
